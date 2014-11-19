@@ -5,7 +5,7 @@ gutter_w = 7.5;
 insert_d = 10;
 
 sep = 8;
-tile_h = 1;
+tile_h = 2;
 
 overall_w = gutter_w + insert_d + gutter_w + slot_len + gutter_w;
 overall_h = slot_w + gutter_w * 2;
