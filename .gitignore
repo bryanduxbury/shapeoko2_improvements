@@ -1,3 +1,6 @@
 *.nc
 *.b#*
 *.s#*
+*.dru
+*.nci
+*~tmp.scr
