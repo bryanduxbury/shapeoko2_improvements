@@ -4,16 +4,17 @@
 insert_spacing_v = 75;
 insert_spacing_h = 500 - 2 * (60 + insert_spacing_v);
 
-insert_bore = 10;
+insert_bore = 10.4;
+insert_counterbore = 14;
 
-hold_down_bore = 6.5;
+hold_down_bore = 7;
 
 gutter = 10;
 
 corner_relief_r = 5;
 
 w = insert_spacing_h + 2 * gutter;
-h = insert_spacing_v * 3 + 2 * gutter;
+h = insert_spacing_v * 2 + 2 * gutter;
 
 
 module jig_base() {
@@ -33,14 +34,17 @@ module jig_base() {
     }
 
     for (x = [-1,1], y=[-1,1]) {
-      translate([x * insert_spacing_h / 2, y * (insert_spacing_v * 3 / 2), 0]) 
+      translate([x * insert_spacing_h / 2, y * (insert_spacing_v * 2 / 2), 0])
         circle(r=hold_down_bore/2, $fn=36);
     }
 
     for (x = [-1:1], y=[-1:1]) {
       if (! (x==0 && y==0)) {
         translate([x * (100 / 2 + 5 + insert_bore/2), y * (100 / 2 + 5 + insert_bore/2), 0]) 
-        circle(r=insert_bore/2, $fn=36);
+        difference() {
+          circle(r=insert_counterbore/2, $fn=36);
+          circle(r=insert_bore/2, $fn=36);
+        }
       }
     }
 
@@ -78,7 +82,7 @@ module clamp_frame() {
 
 // difference() {
   // square(size=[11.6 * 25.4, 11.6 * 25.4], center=true);
-  color("pink") linear_extrude(height=19) jig_base();
+  color("pink") linear_extrude(height=19) !jig_base();
 // }
 
-translate([0, 0, 19]) linear_extrude(height=5) !clamp_frame();
+// translate([0, 0, 19]) linear_extrude(height=5) !clamp_frame();
