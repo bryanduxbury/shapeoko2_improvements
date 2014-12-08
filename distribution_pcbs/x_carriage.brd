@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.1.0">
+<eagle version="7.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -234,18 +234,18 @@ design rules under a new name.</description>
 <param name="layerSetup" value="(1*16)"/>
 <param name="mtCopper" value="0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm 0.035mm"/>
 <param name="mtIsolate" value="1.5mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm 0.15mm 0.2mm"/>
-<param name="mdWireWire" value="16mil"/>
-<param name="mdWirePad" value="16mil"/>
-<param name="mdWireVia" value="16mil"/>
-<param name="mdPadPad" value="16mil"/>
-<param name="mdPadVia" value="16mil"/>
-<param name="mdViaVia" value="16mil"/>
-<param name="mdSmdPad" value="16mil"/>
-<param name="mdSmdVia" value="16mil"/>
-<param name="mdSmdSmd" value="16mil"/>
+<param name="mdWireWire" value="10mil"/>
+<param name="mdWirePad" value="10mil"/>
+<param name="mdWireVia" value="10mil"/>
+<param name="mdPadPad" value="10mil"/>
+<param name="mdPadVia" value="10mil"/>
+<param name="mdViaVia" value="10mil"/>
+<param name="mdSmdPad" value="10mil"/>
+<param name="mdSmdVia" value="10mil"/>
+<param name="mdSmdSmd" value="10mil"/>
 <param name="mdViaViaSameLayer" value="8mil"/>
 <param name="mnLayersViaInSmd" value="2"/>
-<param name="mdCopperDimension" value="40mil"/>
+<param name="mdCopperDimension" value="20mil"/>
 <param name="mdDrill" value="8mil"/>
 <param name="mdSmdStop" value="0mil"/>
 <param name="msWidth" value="10mil"/>
@@ -410,56 +410,56 @@ design rules under a new name.</description>
 <signal name="N$1">
 <contactref element="ST_X_IN" pad="4"/>
 <contactref element="ST_X_OUT" pad="4"/>
-<wire x1="30" y1="49.38" x2="33.37" y2="49.38" width="1.5" layer="16"/>
-<wire x1="33.37" y1="49.38" x2="40.37" y2="42.38" width="1.5" layer="16"/>
-<wire x1="40.37" y1="42.38" x2="45" y2="42.38" width="1.5" layer="16"/>
+<wire x1="30" y1="49.38" x2="33.37" y2="49.38" width="2" layer="16"/>
+<wire x1="33.37" y1="49.38" x2="40.37" y2="42.38" width="2" layer="16"/>
+<wire x1="40.37" y1="42.38" x2="45" y2="42.38" width="2" layer="16"/>
 </signal>
 <signal name="N$2">
 <contactref element="ST_X_IN" pad="3"/>
 <contactref element="ST_X_OUT" pad="3"/>
-<wire x1="30" y1="51.92" x2="34.83" y2="51.92" width="1.5" layer="16"/>
-<wire x1="34.83" y1="51.92" x2="41.83" y2="44.92" width="1.5" layer="16"/>
-<wire x1="41.83" y1="44.92" x2="45" y2="44.92" width="1.5" layer="16"/>
+<wire x1="30" y1="51.92" x2="34.83" y2="51.92" width="2" layer="16"/>
+<wire x1="34.83" y1="51.92" x2="41.83" y2="44.92" width="2" layer="16"/>
+<wire x1="41.83" y1="44.92" x2="45" y2="44.92" width="2" layer="16"/>
 </signal>
 <signal name="N$3">
 <contactref element="ST_X_IN" pad="2"/>
 <contactref element="ST_X_OUT" pad="2"/>
-<wire x1="30" y1="54.46" x2="36.54" y2="54.46" width="1.5" layer="16"/>
-<wire x1="36.54" y1="54.46" x2="43.54" y2="47.46" width="1.5" layer="16"/>
-<wire x1="43.54" y1="47.46" x2="45" y2="47.46" width="1.5" layer="16"/>
+<wire x1="30" y1="54.46" x2="36.54" y2="54.46" width="2" layer="16"/>
+<wire x1="36.54" y1="54.46" x2="43.54" y2="47.46" width="2" layer="16"/>
+<wire x1="43.54" y1="47.46" x2="45" y2="47.46" width="2" layer="16"/>
 </signal>
 <signal name="N$4">
 <contactref element="ST_X_IN" pad="1"/>
 <contactref element="ST_X_OUT" pad="1"/>
-<wire x1="30" y1="57" x2="38" y2="57" width="1.5" layer="16"/>
-<wire x1="38" y1="57" x2="45" y2="50" width="1.5" layer="16"/>
+<wire x1="30" y1="57" x2="38" y2="57" width="2" layer="16"/>
+<wire x1="38" y1="57" x2="45" y2="50" width="2" layer="16"/>
 </signal>
 <signal name="N$13">
 <contactref element="ST_Z_IN" pad="4"/>
 <contactref element="ST_Z_OUT" pad="4"/>
-<wire x1="30" y1="10.38" x2="41" y2="10.38" width="1.5" layer="16"/>
-<wire x1="41" y1="10.38" x2="45" y2="14.38" width="1.5" layer="16"/>
+<wire x1="30" y1="10.38" x2="41" y2="10.38" width="2" layer="16"/>
+<wire x1="41" y1="10.38" x2="45" y2="14.38" width="2" layer="16"/>
 </signal>
 <signal name="N$14">
 <contactref element="ST_Z_IN" pad="3"/>
 <contactref element="ST_Z_OUT" pad="3"/>
-<wire x1="30" y1="12.92" x2="39.42" y2="12.92" width="1.5" layer="16"/>
-<wire x1="39.42" y1="12.92" x2="43.42" y2="16.92" width="1.5" layer="16"/>
-<wire x1="43.42" y1="16.92" x2="45" y2="16.92" width="1.5" layer="16"/>
+<wire x1="30" y1="12.92" x2="39.42" y2="12.92" width="2" layer="16"/>
+<wire x1="39.42" y1="12.92" x2="43.42" y2="16.92" width="2" layer="16"/>
+<wire x1="43.42" y1="16.92" x2="45" y2="16.92" width="2" layer="16"/>
 </signal>
 <signal name="N$15">
 <contactref element="ST_Z_IN" pad="2"/>
 <contactref element="ST_Z_OUT" pad="2"/>
-<wire x1="30" y1="15.46" x2="38.21" y2="15.46" width="1.5" layer="16"/>
-<wire x1="38.21" y1="15.46" x2="42.21" y2="19.46" width="1.5" layer="16"/>
-<wire x1="42.21" y1="19.46" x2="45" y2="19.46" width="1.5" layer="16"/>
+<wire x1="30" y1="15.46" x2="38.21" y2="15.46" width="2" layer="16"/>
+<wire x1="38.21" y1="15.46" x2="42.21" y2="19.46" width="2" layer="16"/>
+<wire x1="42.21" y1="19.46" x2="45" y2="19.46" width="2" layer="16"/>
 </signal>
 <signal name="N$16">
 <contactref element="ST_Z_IN" pad="1"/>
 <contactref element="ST_Z_OUT" pad="1"/>
-<wire x1="30" y1="18" x2="36.75" y2="18" width="1.5" layer="16"/>
-<wire x1="36.75" y1="18" x2="40.75" y2="22" width="1.5" layer="16"/>
-<wire x1="40.75" y1="22" x2="45" y2="22" width="1.5" layer="16"/>
+<wire x1="30" y1="18" x2="36.75" y2="18" width="2" layer="16"/>
+<wire x1="36.75" y1="18" x2="40.75" y2="22" width="2" layer="16"/>
+<wire x1="40.75" y1="22" x2="45" y2="22" width="2" layer="16"/>
 </signal>
 <signal name="GNDA">
 <contactref element="LIMIT_Z1" pad="1"/>
