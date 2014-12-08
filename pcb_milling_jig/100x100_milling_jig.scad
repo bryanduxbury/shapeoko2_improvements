@@ -26,35 +26,37 @@ module jig_base() {
       }
     }
 
-    union() {
-      square(size=[103, 103], center=true);
-      for (a=[0:3]) {
-        rotate([0, 0, a * 90]) translate([50, 50, 0]) circle(r=corner_relief_r, $fn=36);
-      }
-    }
-
-    for (x = [-1,1], y=[-1,1]) {
-      translate([x * insert_spacing_h / 2, y * (insert_spacing_v * 2 / 2), 0])
-        circle(r=hold_down_bore/2, $fn=36);
-    }
-
-    for (x = [-1:1], y=[-1:1]) {
-      if (! (x==0 && y==0)) {
-        translate([x * (100 / 2 + 5 + insert_bore/2), y * (100 / 2 + 5 + insert_bore/2), 0]) 
-        difference() {
-          circle(r=insert_counterbore/2, $fn=36);
-          circle(r=insert_bore/2, $fn=36);
+    !translate([w/2 - gutter, h/2 - gutter, 0]) union() {
+      union() {
+        square(size=[103, 103], center=true);
+        for (a=[0:3]) {
+          rotate([0, 0, a * 90]) translate([50, 50, 0]) circle(r=corner_relief_r, $fn=36);
         }
       }
+
+      for (x = [-1,1], y=[-1,1]) {
+        translate([x * insert_spacing_h / 2, y * (insert_spacing_v * 2 / 2), 0])
+          circle(r=hold_down_bore/2, $fn=36);
+      }
+
+      for (x = [-1:1], y=[-1:1]) {
+        if (! (x==0 && y==0)) {
+          translate([x * (100 / 2 + 5 + insert_bore/2), y * (100 / 2 + 5 + insert_bore/2), 0]) 
+          difference() {
+            circle(r=insert_counterbore/2, $fn=36);
+            circle(r=insert_bore/2, $fn=36);
+          }
+        }
+      }
+
+      translate([-103/2 - 25, -103/2 - 25, 0]) 
+        circle(r=0.125 / 2 * 25.4, $fn=36);
+      translate([103/2 + 25, -103/2 - 25, 0]) 
+        circle(r=0.125 / 2 * 25.4, $fn=36);
+
+      translate([-w/2 + 25, -h/2 + 25 + 5, 0]) square(size=[0.5, 10], center=true);
+      translate([-w/2 + 25 + 5, -h/2 + 25, 0]) square(size=[10, 0.5], center=true);
     }
-
-    translate([-103/2 - 25, -103/2 - 25, 0]) 
-      circle(r=0.125 / 2 * 25.4, $fn=36);
-    translate([103/2 + 25, -103/2 - 25, 0]) 
-      circle(r=0.125 / 2 * 25.4, $fn=36);
-
-    translate([-w/2 + 25, -h/2 + 25 + 5, 0]) square(size=[0.5, 10], center=true);
-    translate([-w/2 + 25 + 5, -h/2 + 25, 0]) square(size=[10, 0.5], center=true);
   }
 }
 
@@ -82,7 +84,7 @@ module clamp_frame() {
 
 // difference() {
   // square(size=[11.6 * 25.4, 11.6 * 25.4], center=true);
-  color("pink") linear_extrude(height=19) !jig_base();
+  color("pink") linear_extrude(height=19) jig_base();
 // }
 
 // translate([0, 0, 19]) linear_extrude(height=5) !clamp_frame();
