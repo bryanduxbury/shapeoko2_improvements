@@ -107,3 +107,41 @@ module mains_plug_connector() {
     cube(size=[26.75, 16, 19.95], center=true);
   }
 }
+
+module led_holder(args) {
+  color("green")
+  cylinder(r=19/64 * 25.4 / 2, h=10, center=true);
+}
+
+module toggle_switch() {
+  rotate([15, 0, 0]) translate([0, 0, 5]) cylinder(r=2, h=10, center=true);
+  translate([0, 0, -15/2 - 7]) cube(size=[15, 25, 15], center=true);
+  translate([0, 0, -7/2]) cylinder(r=5, h=7, center=true);
+}
+
+module square_momentary() {
+  color("red")
+  translate([0, 0, 4]) 
+  cube(size=[10, 10, 8], center=true);
+}
+
+module external_connectors_board() {
+  color("green")
+  translate([0, 0, -1.5/2]) 
+  difference() {
+    cube(size=[70, 40, 1.5], center=true);
+
+    // m5 mounting holes
+    for (x=[-1,1], y=[-1,1]) {
+      translate([x * (70/2 - 3.25), -40/2 + 15 + y * (30/2 - 3.25), 0]) circle(r=5/2, $fn=12);
+    }
+  }
+
+  color("gray")
+  translate([-70/2, -40/2, 0]) 
+  for (xy=[[5,15,0], [17.5,15,0], [30,15,0], [42.5,15,0], [55,15,0]]) {
+    translate(xy) 
+    translate([2.5*3/2, 0, 15/2]) 
+    cube(size=[11, 6, 15], center=true);
+  }
+}

@@ -1,7 +1,5 @@
 // TODO:
-// - mounting holes for motor supply zip ties
 // - mounting holes for control panel hinges
-// - add screw-down fins to control panel
 // - cut-out and mounting holes for usb bulkhead
 // - connection point for anchor
 // - connector panel board???
@@ -37,12 +35,52 @@ module _e() {
 }
 
 module control_panel_assembly() {
-  color("white")
-  _e() control_panel_2d();
-  
-  translate([w/2 - 40, d / 2 - 70, 0]) estop();
-  
-  spindle_speed_pot();
+  assign(a = d - m - t/2)
+  assign(b = h - m - t/2)
+  assign(c = sqrt(a * a + b * b))
+  assign(wp = w - 2*t)
+  assign(hp = c) {
+    color("white")
+    _e() control_panel_2d();
+
+    translate([w/2 - 40, hp / 2 - 60, 0]) estop();
+
+
+    translate([-wp/2 + 20, hp/2 - 60, 0]) spindle_speed_pot();
+    translate([-wp/2 + 20 + 20, hp/2 - 60 + 20, 0]) led_holder();
+    translate([-wp/2 + 20 + 40, hp/2 - 60 + 20, 0]) led_holder();
+    translate([-wp/2 + 20 + 30, hp/2 - 60, 7 - t]) toggle_switch();
+    translate([-wp/2 + 20 + 10, hp/2 - 80, 7 - t]) rotate([0, 0, 90]) toggle_switch();
+
+
+    translate([0, hp/2 - 60 + 20, 0]) led_holder();
+    translate([0, hp/2 - 60, 7 - t]) toggle_switch();
+
+
+    translate([wp/2 - 75, -hp/2 + 30 + 20, 0]) {
+      for (i=[[0, 1], [-1, 0], [0, -1], [1, 0]]) {
+        translate([i[0] * 20, i[1] * 20, 0]) square_momentary();
+      }
+
+      translate([45, 0, 0]) {
+        for (y=[-1,1]) {
+          translate([0, y * 15, 0]) square_momentary();
+        }
+      }
+    }
+
+    translate([-wp/2 + 20, -hp/2 + 30, 0]) {
+      for (y=[0:3]) {
+        translate([0, y * 20, 0]) square_momentary();
+      }
+    }
+
+    translate([-wp/2 + 75, -hp/2 + 30, 0]) {
+      for (y=[0:2]) {
+        translate([0, y * 20, 0]) square_momentary();
+      }
+    }
+  }
 }
 
 module control_panel_2d() {
@@ -121,6 +159,17 @@ module back_2d() {
             circle(r=k/2 + 0.1, $fn=12);
           }
         }
+      }
+    }
+
+    // motors, limits, and spindle connector board
+    translate([-w/2 + t + 5 + 70/2, -h/2 + t / 2 + t + 5 + 40/2 - 40/2 + 30/2,0]) {
+      translate([1.5, 0, 0]) 
+      square(size=[65, 10], center=true);
+
+      for (x=[-1,1], y=[-1,1]) {
+        translate([x * (70/2 - 3.25), y * (30 / 2 - 3.25), 0]) 
+          circle(r=5/2+0.2, $fn=36);
       }
     }
   }
@@ -211,6 +260,10 @@ module base_2d() {
       translate([x * 150/2, y * 50/2, 0]) 
         circle(r=4/2, $fn=12);
     }
+
+    for (x=[-1:1], y=[-1,1]) {
+      translate([x * 50, -d/2 + 5 + 15 + 60/2 + y * (60 / 2 + 3/2), 0]) square(size=[5, 3], center=true);
+    }
   }
 }
 
@@ -283,6 +336,9 @@ module full_assembly() {
   translate([0, -d/2 + t/2, -h/2 + m])
   rotate([90-asin(a/c), 0, 0])
   translate([0, c/2, t/2]) control_panel_assembly();
+
+  translate([-w/2 + t + 5 + 70/2, d/2 - t / 2 - t - t, -h/2 + t / 2 + t + 5 + 40/2]) 
+  rotate([90, 0, 180]) external_connectors_board();
 
   translate([0, 0, -h/2 + t]) 
   _e() base_2d();
