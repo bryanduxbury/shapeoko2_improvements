@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="7.1.0">
+<eagle version="7.2.0">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1390,11 +1390,11 @@ Standard 4-pin 0.1" header. Use with straight break away headers (SKU : PRT-0011
 <part name="ST_Z_IN" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
 <part name="LIMIT_Y1" library="SparkFun-Connectors" deviceset="M02" device="POLAR" value="M02POLAR"/>
 <part name="LIMIT_Y2" library="SparkFun-Connectors" deviceset="M02" device="POLAR" value="M02POLAR"/>
-<part name="ST_X_OUT" library="SparkFun-Connectors" deviceset="M04" device="PTH"/>
-<part name="ST_Y_OUT" library="SparkFun-Connectors" deviceset="M04" device="PTH"/>
-<part name="ST_Z_OUT" library="SparkFun-Connectors" deviceset="M04" device="PTH"/>
+<part name="ST_X_OUT" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
+<part name="ST_Y_OUT" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
+<part name="ST_Z_OUT" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
 <part name="GND2" library="supply1" deviceset="GNDA" device=""/>
-<part name="LIMIT_OUT" library="SparkFun-Connectors" deviceset="M04" device="PTH"/>
+<part name="LIMIT_OUT" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
 <part name="GND4" library="supply1" deviceset="GNDA" device=""/>
 <part name="LIMIT_IN" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
 <part name="GND1" library="supply1" deviceset="GNDA" device=""/>
