@@ -1,11 +1,27 @@
 // TODO:
+// - measure hinges
 // - mounting holes for control panel hinges
 // - cut-out and mounting holes for usb bulkhead
 // - connection point for anchor
-// - connector panel board???
+// - measure all control panel items and cutouts
+// - cutouts for all control panel items
+// - hanging tabs with captive nuts for control panel screw-down
+// - corner relief on all tenons
+// - corner relief on all mortises
+// - spacer "ring" for external connectors board
+// - measure led holders
+// - move the fan to blow directly onto the stepper shield
 
 use <external_parts.scad>
 use <arduino.scad>
+use <../shapeoko2_parts_models/endplate.scad>
+use <../shapeoko2_parts_models/arduino.scad>
+use <../shapeoko2_parts_models/spindle_speed_controller.scad>
+use <../shapeoko2_parts_models/enclosure_connectors_board.scad>
+use <../shapeoko2_parts_models/fan.scad>
+use <../shapeoko2_parts_models/spindle_speed_control_pot.scad>
+use <../shapeoko2_parts_models/estop.scad>
+use <../shapeoko2_parts_models/short_bracket.scad>
 
 t = 5.2;
 
@@ -27,7 +43,6 @@ fan_mount_hole_d = 50;
 spindle_supply_hole_x = 150;
 spindle_supply_hole_y = 50;
 
-
 module _e() {
   linear_extrude(height=t, center=true) {
     children(0);
@@ -47,17 +62,29 @@ module control_panel_assembly() {
 
 
     translate([-wp/2 + 20, hp/2 - 60, 0]) spindle_speed_pot();
+
+    // spindle enabled
     translate([-wp/2 + 20 + 20, hp/2 - 60 + 20, 0]) led_holder();
+    // spindle engaged
     translate([-wp/2 + 20 + 40, hp/2 - 60 + 20, 0]) led_holder();
+    // spindle enable
     translate([-wp/2 + 20 + 30, hp/2 - 60, 7 - t]) toggle_switch();
-    translate([-wp/2 + 20 + 10, hp/2 - 80, 7 - t]) rotate([0, 0, 90]) toggle_switch();
 
+    // manual spindle speed control mode
+    translate([-wp/2 + 15, hp/2 - 80, 7 - t]) led_holder();
+    // auto spindle speed control mode
+    translate([-wp/2 + 45, hp/2 - 80, 7 - t]) led_holder();
+    // spindle speed mode selector toggle
+    translate([-wp/2 + 20 + 10, hp/2 - 80, 7 - t]) rotate([0, 0, 90]) 
+      toggle_switch();
 
+    // motors engaged indicator
     translate([0, hp/2 - 60 + 20, 0]) led_holder();
+    // motor enable/disable switch
     translate([0, hp/2 - 60, 7 - t]) toggle_switch();
 
-
-    translate([wp/2 - 75, -hp/2 + 30 + 20, 0]) {
+    // jog d-pad
+    translate([wp/2 - 75, -hp/2 + 30 + 40, 0]) {
       for (i=[[0, 1], [-1, 0], [0, -1], [1, 0]]) {
         translate([i[0] * 20, i[1] * 20, 0]) square_momentary();
       }
@@ -69,13 +96,15 @@ module control_panel_assembly() {
       }
     }
 
+    // leftmost control buttons
     translate([-wp/2 + 20, -hp/2 + 30, 0]) {
       for (y=[0:3]) {
         translate([0, y * 20, 0]) square_momentary();
       }
     }
 
-    translate([-wp/2 + 75, -hp/2 + 30, 0]) {
+    // right control buttons
+    translate([-wp/2 + 75, -hp/2 + 30 + 20, 0]) {
       for (y=[0:2]) {
         translate([0, y * 20, 0]) square_momentary();
       }
@@ -311,14 +340,10 @@ module front_margin_2d() {
 module full_assembly() {
   translate([-w/2+215/2 + t + 5, d/2 - 115/2 - t - 35, -h/2 + 1.5*t + 50/2]) 
   spindle_power_supply();
-  
+
   translate([-w/2 + t + t/2 + 50/2 + 5, d/2 - t, h/2 - 75/2 - t - 5]) 
   rotate([0, -90, 90]) 
   spindle_speed_controller();
-
-  translate([w/2 - 25/2 - t/2 - t, d/2 - 60/2- t - 5, h/2 - 60/2 - t - 15]) 
-  rotate([90, 0, 90]) 
-  fan(60, 25, fan_mount_hole_d, 4.3/2);
 
   translate([0, -d/2 + t + 15 + 60/2, -h/2 + 1.5*t + 33/2]) 
   motor_power_supply();
@@ -326,19 +351,26 @@ module full_assembly() {
   translate([0, d/2 - t - 6, h/2 - t - 10 - 10 - 2.7*25.4]) 
   electronics_assembly();
 
+  translate([25, d/2 - 60/2 - t - t/2 - 10, -25]) {
+    // fan(60, 25, fan_mount_hole_d, 4.3/2);
+    rotate([90, 0, 0]) translate([0, 0, -25/2]) short_bracket();
+  }
+  
+
+
   translate([w/2 - 2 * t - 31.25 / 2, d/2 - t/2, -h/2 + 2.5 * t + 24 / 2]) 
   rotate([0, 0, 180]) 
   mains_plug_connector();
 
-  assign(a = d - m - t/2)
-  assign(b = h - m - t/2)
-  assign(c = sqrt(a * a + b * b))
-  translate([0, -d/2 + t/2, -h/2 + m])
-  rotate([90-asin(a/c), 0, 0])
-  translate([0, c/2, t/2]) control_panel_assembly();
+  // assign(a = d - m - t/2)
+  // assign(b = h - m - t/2)
+  // assign(c = sqrt(a * a + b * b))
+  // translate([0, -d/2 + t/2, -h/2 + m])
+  // rotate([90-asin(a/c), 0, 0])
+  // translate([0, c/2, t/2]) control_panel_assembly();
 
   translate([-w/2 + t + 5 + 70/2, d/2 - t / 2 - t - t, -h/2 + t / 2 + t + 5 + 40/2]) 
-  rotate([90, 0, 180]) external_connectors_board();
+  rotate([90, 0, 180]) enclosure_connectors_board();
 
   translate([0, 0, -h/2 + t]) 
   _e() base_2d();
