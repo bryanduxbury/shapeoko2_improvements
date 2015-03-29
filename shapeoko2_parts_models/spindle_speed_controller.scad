@@ -11,7 +11,7 @@ module spindle_speed_controller() {
         }
       }
       for (y=[-1,1]) {
-        translate([0.5 + .125/2, y * (44 / 25.4 / 2), 0]) 
+        translate([0.5 + .125/2, y * (43 / 25.4 / 2), 0]) 
         #cylinder(r=.125/2, h=3, center=true, $fn=12);
       }
     }

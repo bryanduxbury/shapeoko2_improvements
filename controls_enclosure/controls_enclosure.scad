@@ -10,7 +10,7 @@
 // - corner relief on all mortises
 // - spacer "ring" for external connectors board
 // - measure led holders
-// - move the fan to blow directly onto the stepper shield
+// - adjust spindle speed controller mounting holes (they were too far apart in the single-panel design)
 
 use <external_parts.scad>
 use <arduino.scad>
@@ -40,14 +40,15 @@ m = 60;
 
 fan_mount_hole_d = 50;
 
-spindle_supply_hole_x = 150;
-spindle_supply_hole_y = 50;
-
 module _e() {
   linear_extrude(height=t, center=true) {
     children(0);
   }
 }
+
+// module _tenon(depth, width, corner_relief_r) {
+//   union()
+// }
 
 module control_panel_assembly() {
   assign(a = d - m - t/2)
@@ -61,7 +62,7 @@ module control_panel_assembly() {
     translate([w/2 - 40, hp / 2 - 60, 0]) estop();
 
 
-    translate([-wp/2 + 20, hp/2 - 60, 0]) spindle_speed_pot();
+    translate([-wp/2 + 20, hp/2 - 60, 0]) spindle_speed_control_pot();
 
     // spindle enabled
     translate([-wp/2 + 20 + 20, hp/2 - 60 + 20, 0]) led_holder();
@@ -201,6 +202,14 @@ module back_2d() {
           circle(r=5/2+0.2, $fn=36);
       }
     }
+
+    // fan bracket holes
+    translate([25, -25 - 25/2, 0]) {
+      for (x=[-1,1]) {
+        translate([x * 25, -21 + 4.5, 0]) 
+        circle(r=5.2/2, $fn=36);
+      }
+    }
   }
 }
 
@@ -242,29 +251,6 @@ module leftside_2d() {
 module rightside_2d() {
   difference() {
     _side_base();
-    translate([d/2 - 60/2 - t - 5, h/2 - 60 / 2 - t - 15, 0]) {
-      for (a=[0:3]) {
-        rotate([0, 0, a*90]) 
-        translate([fan_mount_hole_d/2, fan_mount_hole_d/2, 0]) 
-        circle(r=2, $fn=36);
-      }
-
-      assign(slits = 5)
-      assign(f = fan_mount_hole_d / 4 - 1.5)
-      for (a=[0:3]) {
-        rotate([0, 0, a*90]) 
-        translate([f, f + k/2, 0]) 
-        for (x=[-floor(slits/2):floor(slits/2)]) {
-          translate([x * 2 * f * 2 / (slits * 2 - 1), 0, 0])
-          hull() {
-            for (y=[-1,1]) {
-              translate([0, y * (f - k/2 - k/2), 0]) 
-                circle(r=k/2, $fn=12);
-            }
-          }
-        }
-      }
-    }
   }
 }
 
@@ -351,23 +337,26 @@ module full_assembly() {
   translate([0, d/2 - t - 6, h/2 - t - 10 - 10 - 2.7*25.4]) 
   electronics_assembly();
 
-  translate([25, d/2 - 60/2 - t - t/2 - 10, -25]) {
-    // fan(60, 25, fan_mount_hole_d, 4.3/2);
-    rotate([90, 0, 0]) translate([0, 0, -25/2]) short_bracket();
-  }
-  
+  translate([25, d/2 - 60/2 - t - t/2 - 10, -25])
+    fan(60, 25, fan_mount_hole_d, 4.3/2);
 
+  translate([25, d/2 - t - t/2 - 10, -25 - 25/2]) {
+    for (x=[-1,1]) {
+      translate([x * 25, 0, 0]) 
+      rotate([0, 180, 0]) short_bracket();
+    }
+  }
 
   translate([w/2 - 2 * t - 31.25 / 2, d/2 - t/2, -h/2 + 2.5 * t + 24 / 2]) 
   rotate([0, 0, 180]) 
   mains_plug_connector();
 
-  // assign(a = d - m - t/2)
-  // assign(b = h - m - t/2)
-  // assign(c = sqrt(a * a + b * b))
-  // translate([0, -d/2 + t/2, -h/2 + m])
-  // rotate([90-asin(a/c), 0, 0])
-  // translate([0, c/2, t/2]) control_panel_assembly();
+  assign(a = d - m - t/2)
+  assign(b = h - m - t/2)
+  assign(c = sqrt(a * a + b * b))
+  translate([0, -d/2 + t/2, -h/2 + m])
+  rotate([90-asin(a/c), 0, 0])
+  translate([0, c/2, t/2]) control_panel_assembly();
 
   translate([-w/2 + t + 5 + 70/2, d/2 - t / 2 - t - t, -h/2 + t / 2 + t + 5 + 40/2]) 
   rotate([90, 0, 180]) enclosure_connectors_board();
@@ -385,10 +374,10 @@ module full_assembly() {
   rotate([90, 0, 90]) 
   _e() leftside_2d();
 
-  // color("tan")
-  // translate([w/2 - t / 2, 0, 0])
-  // rotate([90, 0, 90])
-  // _e() rightside_2d();
+  color("tan")
+  translate([w/2 - t / 2, 0, 0])
+  rotate([90, 0, 90])
+  _e() rightside_2d();
   
   color("pink")
   translate([0, -d/2 + t, -h/2 + m/2]) 
