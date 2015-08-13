@@ -8291,14 +8291,14 @@ by R. Vogg  15.March.2002</description>
 <part name="GND3" library="supply1" deviceset="GNDA" device=""/>
 <part name="GND4" library="supply1" deviceset="GNDA" device=""/>
 <part name="GND5" library="supply1" deviceset="GNDA" device=""/>
-<part name="R2" library="rcl" deviceset="R-US_" device="M0805"/>
-<part name="R3" library="rcl" deviceset="R-US_" device="M0805"/>
+<part name="R2" library="rcl" deviceset="R-US_" device="M0805" value="1m"/>
+<part name="R3" library="rcl" deviceset="R-US_" device="M0805" value="10k"/>
 <part name="GND6" library="supply1" deviceset="GNDA" device=""/>
 <part name="P+2" library="supply1" deviceset="+5V" device=""/>
 <part name="PROBE" library="SparkFun-Connectors" deviceset="M02" device="POLAR"/>
-<part name="C2" library="rcl" deviceset="C-US" device="C0805K"/>
-<part name="C3" library="rcl" deviceset="C-US" device="C0805K"/>
-<part name="C4" library="rcl" deviceset="C-US" device="C0805K"/>
+<part name="C2" library="rcl" deviceset="C-US" device="C0805K" value="0.1u"/>
+<part name="C3" library="rcl" deviceset="C-US" device="C0805K" value="0.1u"/>
+<part name="C4" library="rcl" deviceset="C-US" device="C0805K" value="0.1u"/>
 <part name="GND7" library="supply1" deviceset="GNDA" device=""/>
 <part name="JP_LIMIT_Z" library="SparkFun-Connectors" deviceset="M03" device="POLAR"/>
 <part name="JP_SPINDLE" library="SparkFun-Connectors" deviceset="M03" device="POLAR"/>
@@ -8316,9 +8316,9 @@ by R. Vogg  15.March.2002</description>
 <part name="GND1" library="supply1" deviceset="GNDA" device=""/>
 <part name="LIMIT_INDICATORS" library="SparkFun-Connectors" deviceset="M04" device="POLAR"/>
 <part name="P+3" library="supply1" deviceset="+5V" device=""/>
-<part name="R1" library="rcl" deviceset="R-US_" device="M0805"/>
-<part name="R4" library="rcl" deviceset="R-US_" device="M0805"/>
-<part name="R5" library="rcl" deviceset="R-US_" device="M0805"/>
+<part name="R1" library="rcl" deviceset="R-US_" device="M0805" value="220"/>
+<part name="R4" library="rcl" deviceset="R-US_" device="M0805" value="220"/>
+<part name="R5" library="rcl" deviceset="R-US_" device="M0805" value="220"/>
 </parts>
 <sheets>
 <sheet>

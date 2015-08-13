@@ -1,8 +1,8 @@
 slot_len = 75;
-slot_w = 0.250 * 25.4 + 0.1;
+slot_w = 0.265 * 25.4;
 gutter_w = 7.5;
 
-insert_d = 10;
+insert_d = 10.4;
 
 sep = 8;
 tile_h = 2;
